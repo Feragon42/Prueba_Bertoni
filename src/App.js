@@ -20,6 +20,7 @@ class App extends Component {
   handleOnAddTasks(e){
     e.preventDefault();
     let task = {
+      id: this.state.tasks.length+1,
       name: e.target.name.value,
       status: "p"
     };
@@ -31,14 +32,25 @@ class App extends Component {
 
   handleCheckTask(e){
     e.preventDefault();
-    let task = {
-      name: "Learn React",
-      status: "d"
-    }
+    console.log(e.target.getAttribute("n_task"))
+    const tasks = this.state.tasks;
+    tasks[e.target.getAttribute("n_task")-1].status = "d";
     this.setState({
-      "Learn React" : this.state.tasks.status.set("d")
-    })
+      tasks
+    }); 
   }
+
+  handleDeleteTask(e){
+    e.preventDefault();
+    console.log(e.target.getAttribute("n_task"))
+    const tasks = this.state.tasks;
+    tasks.splice(e.target.getAttribute("n_task")-1,1)
+    this.setState({
+      tasks
+    }); 
+    console.log(this.state.task)
+  }
+
 
   render() {
     return (
@@ -54,7 +66,8 @@ class App extends Component {
         <div>
           <br/>
           <TodoList tasks={this.state.tasks} 
-                    checkTask= {this.handleCheckTask.bind(this)}/>
+                    checkTask= {this.handleCheckTask.bind(this)}
+                    deleteTask = {this.handleDeleteTask.bind(this)}/>
           <br/>
           <AddTasks onAddTasks = {this.handleOnAddTasks.bind(this)}/>
         </div>

@@ -8,10 +8,11 @@ class todoList extends Component {
                 {this.props.tasks.map(t => {
                     return(
                         <Tasks
-                            key = {t.id}
+                            index = {t.id}
                             name = {t.name}
                             status = {t.status} 
-                            checkTask = {this.props.checkTask}/>
+                            checkTask = {this.props.checkTask}
+                            deleteTask = {this.props.deleteTask}/>
                     );
                 })}
             </ul>
